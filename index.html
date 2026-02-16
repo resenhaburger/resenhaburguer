@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>ResenhaBurger | Hamburgueria Premium Salvador</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hambúrguer 100% soteropolitano 🍔🔥. Os melhores hambúrgueres artesanais de Salvador com ingredientes premium, combos imperdíveis e entrega rápida. Faça seu pedido!">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+</head>
+<body>
+    <!-- Overlay para fechar carrinho -->
+    <div class="overlay" id="overlay" onclick="toggleCart()"></div>
+
+    <!-- Header com slider de imagens (altura reduzida) -->
+    <header>
+        <div class="header-slider">
+            <div class="slider-container">
+                <div class="slide active">
+                    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Hambúrguer Resenha">
+                </div>
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Hambúrguer Premium">
+                </div>
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Combos">
+                </div>
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Batata Cheddar & Bacon">
+                </div>
+            </div>
+            <div class="slider-nav">
+                <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="slider-dots"></div>
+        </div>
+        
+        <div class="header-content">
+            <div class="logo-container">
+                <img src="logo.png" alt="ResenhaBurger Logo" class="logo-image">
+                <h1 class="brand-name">RESENHA<span class="brand-burger">BURGER</span></h1>
+                <p class="slogan">Hambúrguer 100% soteropolitano 🍔🔥</p>
+                
+                <!-- Status Aberto/Fechado -->
+                <div class="status-container" id="status-container">
+                    <div class="status-indicator" id="status-indicator">
+                        <span class="status-dot"></span>
+                        <span class="status-text" id="status-text">Carregando...</span>
+                    </div>
+                </div>
+                
+                <!-- Horário de funcionamento -->
+                <div class="business-hours">
+                    <i class="fas fa-clock"></i>
+                    <span>Quinta a Domingo: 18:30h às 23:00h</span>
+                </div>
+            </div>
+            
+            <!-- Instagram Link -->
+            <div class="social-container">
+                <a href="https://instagram.com/resenhaburgerssa" target="_blank" class="instagram-link pulse-animation">
+                    <i class="fab fa-instagram"></i>
+                    <div class="instagram-text">
+                        <span class="instagram-line">siga-nos no Instagram</span>
+                        <span class="instagram-line">@resenhaburgerssa</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menu de Categorias Fixo -->
+    <nav class="menu-categories-container">
+        <div class="menu-categories" id="categories-menu">
+            <button class="cat-btn active" onclick="scrollToSection('mais-pedidos')"><i class="fas fa-fire"></i> ⭐ Mais Pedidos</button>
+            <button class="cat-btn" onclick="scrollToSection('smash')"><i class="fas fa-hamburger"></i> 🍔 Smash</button>
+            <button class="cat-btn" onclick="scrollToSection('premium')"><i class="fas fa-crown"></i> 👑 Premium</button>
+            <button class="cat-btn" onclick="scrollToSection('combos')"><i class="fas fa-gift"></i> 🎁 Combos</button>
+            <button class="cat-btn" onclick="scrollToSection('promocoes')"><i class="fas fa-bolt"></i> 🔥 Promoções</button>
+            <button class="cat-btn" onclick="scrollToSection('acompanhamentos')"><i class="fas fa-french-fries"></i> 🍟 Acompanhamentos</button>
+            <button class="cat-btn" onclick="scrollToSection('bebidas')"><i class="fas fa-glass-whiskey"></i> 🥤 Bebidas</button>
+        </div>
+        <div class="current-category" id="current-category">⭐ Mais Pedidos</div>
+    </nav>
+
+    <main>
+        <!-- CONTEÚDO DOS CARDS (ESTÁTICO) -->
+        <div id="categorias-container">
+            <!-- ⭐ MAIS PEDIDOS -->
+            <section id="mais-pedidos" class="category">
+                <div class="category-header">
+                    <h2><i class="fas fa-fire"></i> ⭐ Mais Pedidos da Casa</h2>
+                    <p class="category-subtitle">Os favoritos dos nossos clientes! Experimente os mais amados.</p>
+                </div>
+                <div class="products">
+                    <!-- Card Baratino -->
+                    <div class="card destaque bestseller">
+                        <div class="card-tag-container">
+                            <span class="card-tag bestseller-tag"><i class="fas fa-trophy"></i> Mais Vendido</span>
+                            <span class="economy-badge">Economize 15%</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Baratino</h3>
+                            <div class="card-price-container highlight-price">
+                                <span class="card-price">R$ 24,90</span>
+                                <span class="card-price-badge"><i class="fas fa-bolt"></i> Preço especial</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p><strong>Ingredientes:</strong> Smash 120g (blend tradicional), queijo prato, picles, cebola roxa, alface americana, tomate, pão brioche e molho da casa.</p>
+                            <p><strong>Pão:</strong> Brioche artesanal</p>
+                            <p><strong>Blend:</strong> Tradicional selecionado</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(1, 'Baratino', 24.9, 'mais-pedidos')">
+                                <i class="fas fa-cart-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card Resenha 👑 -->
+                    <div class="card destaque premium-card">
+                        <div class="card-tag-container">
+                            <span class="card-tag premium-tag"><i class="fas fa-crown"></i> Premium</span>
+                            <span class="economy-badge">Carro chefe</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Resenha 👑</h3>
+                            <div class="card-price-container highlight-price">
+                                <span class="card-price">R$ 42,90</span>
+                                <span class="card-price-badge"><i class="fas fa-star"></i> Mais pedido</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p><strong>Ingredientes:</strong> Hamburguer 180g (blend premium), bacon em tiras, queijo cheddar, cebola caramelizada, alface americana, tomate, maionese artesanal e molho barbecue.</p>
+                            <p><strong>Pão:</strong> Brioche especial</p>
+                            <p><strong>Blend:</strong> Premium angus</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(2, 'Resenha 👑', 42.9, 'mais-pedidos')">
+                                <i class="fas fa-cart-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card Sem Miséria 🔥 -->
+                    <div class="card destaque">
+                        <div class="card-tag-container">
+                            <span class="card-tag popular-tag"><i class="fas fa-hamburger"></i> Completo</span>
+                            <span class="economy-badge">Mais completo</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Sem Miséria 🔥</h3>
+                            <div class="card-price-container highlight-price">
+                                <span class="card-price">R$ 52,90</span>
+                                <span class="card-price-badge"><i class="fas fa-fire"></i> Destaque</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p><strong>Ingredientes:</strong> 2x Hamburguer 180g (blend premium), 2x fatias de queijo prato, bacon em tiras, ovo, calabresa, cheddar cremoso, cebola caramelizada, alface americana, tomate e molho especial da casa.</p>
+                            <p><strong>Pão:</strong> Brioche premium</p>
+                            <p><strong>Blend:</strong> Premium especial</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(3, 'Sem Miséria 🔥', 52.9, 'mais-pedidos')">
+                                <i class="fas fa-cart-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card Nuggets 15 unidades -->
+                    <div class="card destaque">
+                        <div class="card-tag-container">
+                            <span class="card-tag popular-tag"><i class="fas fa-share-alt"></i> Popular</span>
+                            <span class="economy-badge">Perfeito para compartilhar</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Nuggets 15 unidades</h3>
+                            <div class="card-price-container highlight-price">
+                                <span class="card-price">R$ 29,90</span>
+                                <span class="card-price-badge"><i class="fas fa-users"></i> Para 2-3 pessoas</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>15 unidades de nuggets crocantes de frango premium. Acompanha molho barbecue ou mostarda e mel.</p>
+                            <p><strong>Molhos inclusos:</strong> Escolha 2 molhos da casa</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(4, 'Nuggets 15 unidades', 29.9, 'mais-pedidos')">
+                                <i class="fas fa-cart-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 🍔 SMASH BURGERS -->
+            <section id="smash" class="category">
+                <div class="category-header">
+                    <h2><i class="fas fa-hamburger"></i> 🍔 Smash Burgers</h2>
+                    <p class="category-subtitle">Tradicionais e suculentos, a técnica que garante máximo sabor!</p>
+                </div>
+                <div class="products">
+                    <!-- Baratino -->
+                    <div class="card">
+                        <div class="card-tag-container">
+                            <span class="card-tag smash-tag"><i class="fas fa-hamburger"></i> Smash</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Baratino</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 24,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p><strong>Ingredientes:</strong> Smash 120g, queijo prato, picles, cebola roxa, alface, tomate, pão brioche, molho da casa.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(1, 'Baratino', 24.9, 'smash')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- É Barril -->
+                    <div class="card">
+                        <div class="card-tag-container">
+                            <span class="card-tag smash-tag">Smash</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>É Barril</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 27,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>Smash 120g, queijo prato, bacon, alface, tomate, cebola caramelizada, pão brioche, molho da casa.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(5, 'É Barril', 27.9, 'smash')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Pivete -->
+                    <div class="card">
+                        <div class="card-tag-container">
+                            <span class="card-tag smash-tag">Smash</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Pivete</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 28,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>Smash 120g, queijo prato, ovo, alface, tomate, pão tradicional, maionese artesanal.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(6, 'Pivete', 28.9, 'smash')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Piriguete -->
+                    <div class="card">
+                        <div class="card-tag-container">
+                            <span class="card-tag smash-tag">Smash</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Piriguete</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 29,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>Smash 120g, queijo cheddar, bacon, alface, tomate, pão brioche, molho barbecue.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(7, 'Piriguete', 29.9, 'smash')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Namoral -->
+                    <div class="card">
+                        <div class="card-tag-container">
+                            <span class="card-tag smash-tag">Smash</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Namoral</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 31,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>Smash 120g, queijo prato, bacon, cebola caramelizada, alface, tomate, pão brioche, molho especial.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(8, 'Namoral', 31.9, 'smash')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Pega Visão -->
+                    <div class="card">
+                        <div class="card-tag-container">
+                            <span class="card-tag smash-tag">Smash</span>
+                            <span class="economy-badge">Duplo</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Pega Visão</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 35,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>2x Smash 120g, 2x queijo prato, alface, tomate, cebola roxa, pão tradicional, molho da casa.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(9, 'Pega Visão', 35.9, 'smash')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Tô na Larica -->
+                    <div class="card">
+                        <div class="card-tag-container">
+                            <span class="card-tag smash-tag">Smash</span>
+                            <span class="economy-badge">Duplo</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Tô na Larica</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 38,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>2x Smash 120g, queijo prato, bacon, alface, tomate, cebola caramelizada, pão brioche, molho especial.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(10, 'Tô na Larica', 38.9, 'smash')">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 👑 PREMIUM -->
+            <section id="premium" class="category">
+                <div class="category-header">
+                    <h2><i class="fas fa-crown"></i> 👑 Burgers Premium</h2>
+                </div>
+                <div class="products">
+                    <!-- Resenha -->
+                    <div class="card premium-card">
+                        <div class="card-tag-container">
+                            <span class="card-tag premium-tag">Premium</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Resenha 👑</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 42,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>180g blend premium, bacon, cheddar, cebola caramelizada, alface, tomate, maionese artesanal, barbecue.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(2, 'Resenha 👑', 42.9, 'premium')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Lá Ele -->
+                    <div class="card premium-card">
+                        <div class="card-tag-container">
+                            <span class="card-tag premium-tag">Premium</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Lá Ele</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 44,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>180g blend premium, 2 ovos, calabresa, queijo prato, bacon, alface, tomate, pão brioche, molho da casa.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(11, 'Lá Ele', 44.9, 'premium')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Cheiro Mole -->
+                    <div class="card premium-card">
+                        <div class="card-tag-container">
+                            <span class="card-tag premium-tag">Premium</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Cheiro Mole</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 43,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>180g blend premium, bacon, queijo coalho, banana da terra frita, cebola caramelizada, alface, tomate, pão brioche, molho barbecue.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(12, 'Cheiro Mole', 43.9, 'premium')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Na Pegada -->
+                    <div class="card premium-card">
+                        <div class="card-tag-container">
+                            <span class="card-tag premium-tag">Premium</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Na Pegada</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 41,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>180g blend premium, queijo cheddar, cebola caramelizada, alface, tomate, pão tradicional, molho especial.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(13, 'Na Pegada', 41.9, 'premium')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Barril Dobrado -->
+                    <div class="card premium-card">
+                        <div class="card-tag-container">
+                            <span class="card-tag premium-tag">Premium</span>
+                            <span class="economy-badge">Duplo</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Barril Dobrado</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 49,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>2x 180g blend premium, 2x queijo prato, alface, tomate, cebola roxa, pão brioche, molho da casa.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(14, 'Barril Dobrado', 49.9, 'premium')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Sem Miséria -->
+                    <div class="card premium-card">
+                        <div class="card-tag-container">
+                            <span class="card-tag premium-tag">Premium</span>
+                            <span class="economy-badge">Completo</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Sem Miséria</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 52,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>2x 180g blend premium, 2x queijo prato, bacon, ovo, calabresa, cheddar, cebola caramelizada, alface, tomate, molho especial.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(15, 'Sem Miséria', 52.9, 'premium')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Tô de Rango -->
+                    <div class="card premium-card">
+                        <div class="card-tag-container">
+                            <span class="card-tag premium-tag">Premium</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Tô de Rango</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 38,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>180g blend premium, queijo prato, alface, tomate, cebola roxa, pão tradicional, molho da casa.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(16, 'Tô de Rango', 38.9, 'premium')">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 🎁 COMBOS -->
+            <section id="combos" class="category combo-section">
+                <div class="category-header">
+                    <h2><i class="fas fa-gift"></i> 🎁 Combos Imperdíveis</h2>
+                </div>
+                <div class="products">
+                    <!-- Combo Muvuca -->
+                    <div class="card combo">
+                        <div class="card-tag-container">
+                            <span class="card-tag combo-tag">Combo</span>
+                            <span class="economy-badge">Economize R$ 9,90</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Combo Muvuca</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 42,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>Smash É Barril + Batata Frita M + Refrigerante 350ml</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(17, 'Combo Muvuca', 42.9, 'combos')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Combo Massa -->
+                    <div class="card combo">
+                        <div class="card-tag-container">
+                            <span class="card-tag combo-tag">Combo</span>
+                            <span class="economy-badge">Economize R$ 10,90</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Combo Massa</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 46,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>Smash Namoral + Batata Frita M + Refrigerante 350ml</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(18, 'Combo Massa', 46.9, 'combos')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Combo Na Cocó -->
+                    <div class="card combo popular-combo">
+                        <div class="card-tag-container">
+                            <span class="card-tag combo-tag">Combo</span>
+                            <span class="economy-badge">Mais Pedido</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Combo Na Cocó</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 59,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>Premium Resenha + Batata Cheddar & Bacon G + Refrigerante 600ml</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(19, 'Combo Na Cocó', 59.9, 'combos')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Combo Migué -->
+                    <div class="card combo">
+                        <div class="card-tag-container">
+                            <span class="card-tag combo-tag">Combo</span>
+                            <span class="economy-badge">Economize R$ 8,90</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Combo Migué</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 36,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>Baratino + Batata Frita P + Refrigerante 350ml</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(20, 'Combo Migué', 36.9, 'combos')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Combo Maresia -->
+                    <div class="card combo">
+                        <div class="card-tag-container">
+                            <span class="card-tag combo-tag">Combo</span>
+                            <span class="economy-badge">Economize R$ 12,90</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Combo Maresia</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 54,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>Premium Na Pegada + Batata Cheddar & Bacon M + Refrigerante 600ml</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(21, 'Combo Maresia', 54.9, 'combos')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Combo Paletada -->
+                    <div class="card combo">
+                        <div class="card-tag-container">
+                            <span class="card-tag combo-tag">Combo</span>
+                            <span class="economy-badge">Economize R$ 17,90</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Combo Paletada</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 56,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>Premium Cheiro Mole + Batata Cheddar & Bacon G</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(22, 'Combo Paletada', 56.9, 'combos')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Combo Sem Miséria Big -->
+                    <div class="card combo popular-combo">
+                        <div class="card-tag-container">
+                            <span class="card-tag combo-tag">Super Combo</span>
+                            <span class="economy-badge">Melhor Custo-Benefício</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Combo Sem Miséria Big 🔥</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 72,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>Premium Sem Miséria + Batata Cheddar & Bacon G + Refrigerante 1L</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(23, 'Combo Sem Miséria Big 🔥', 72.9, 'combos')">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 🔥 PROMOÇÕES -->
+            <section id="promocoes" class="category">
+                <div class="category-header">
+                    <h2><i class="fas fa-bolt"></i> 🔥 Promoções Exclusivas</h2>
+                </div>
+                <div class="products">
+                    <!-- Promo 2 Smash -->
+                    <div class="card promo">
+                        <div class="card-tag-container">
+                            <span class="card-tag promo-tag">Promoção</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>2 Smash por 🔥</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 42,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>Baratino + É Barril</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(24, '2 Smash por 🔥', 42.9, 'promocoes')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Batata + Refri -->
+                    <div class="card promo">
+                        <div class="card-tag-container">
+                            <span class="card-tag promo-tag">Promoção</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Batata + Refri</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 21,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>Batata Frita M + Refrigerante 350ml</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(25, 'Batata + Refri', 21.9, 'promocoes')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Combo Resenha + Batata -->
+                    <div class="card promo">
+                        <div class="card-tag-container">
+                            <span class="card-tag promo-tag">Promoção</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Combo Resenha + Batata</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 52,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>Premium Resenha + Batata Cheddar & Bacon M</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(26, 'Combo Resenha + Batata', 52.9, 'promocoes')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Família Resenha -->
+                    <div class="card promo">
+                        <div class="card-tag-container">
+                            <span class="card-tag promo-tag">Família</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Família Resenha</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 134,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>2x Resenha 👑 + 1x Sem Miséria + 2x Batata Cheddar & Bacon G + 2x Refrigerante 1L</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(27, 'Família Resenha', 134.9, 'promocoes')">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 🍟 ACOMPANHAMENTOS -->
+            <section id="acompanhamentos" class="category">
+                <div class="category-header">
+                    <h2><i class="fas fa-french-fries"></i> 🍟 Acompanhamentos</h2>
+                </div>
+                <div class="products">
+                    <!-- Batata Frita P -->
+                    <div class="card">
+                        <div class="card-tag-container">
+                            <span class="card-tag side-tag">Acompanhamento</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Batata Frita P</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 12,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>Porção individual de batata frita crocante.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(28, 'Batata Frita P', 12.9, 'acompanhamentos')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Batata Frita M -->
+                    <div class="card">
+                        <div class="card-tag-container">
+                            <span class="card-tag side-tag">Acompanhamento</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Batata Frita M</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 18,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>Porção média de batata frita crocante.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(29, 'Batata Frita M', 18.9, 'acompanhamentos')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Batata Frita G -->
+                    <div class="card">
+                        <div class="card-tag-container">
+                            <span class="card-tag side-tag">Acompanhamento</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Batata Frita G</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 24,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>Porção grande de batata frita crocante.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(30, 'Batata Frita G', 24.9, 'acompanhamentos')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Batata Cheddar & Bacon P -->
+                    <div class="card">
+                        <div class="card-tag-container">
+                            <span class="card-tag side-tag">Acompanhamento</span>
+                            <span class="economy-badge">Mais pedido</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Batata Cheddar & Bacon P</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 22,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>Batata frita com cheddar cremoso e farofa de bacon.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(31, 'Batata Cheddar & Bacon P', 22.9, 'acompanhamentos')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Batata Cheddar & Bacon M -->
+                    <div class="card">
+                        <div class="card-tag-container">
+                            <span class="card-tag side-tag">Acompanhamento</span>
+                            <span class="economy-badge">Mais pedido</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Batata Cheddar & Bacon M</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 29,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>Batata frita com cheddar cremoso e farofa de bacon.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(32, 'Batata Cheddar & Bacon M', 29.9, 'acompanhamentos')">Adicionar</button>
+                        </div>
+                    </div>
+                    <!-- Batata Cheddar & Bacon G -->
+                    <div class="card">
+                        <div class="card-tag-container">
+                            <span class="card-tag side-tag">Acompanhamento</span>
+                            <span class="economy-badge">Mais pedido</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Batata Cheddar & Bacon G</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 35,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>Batata frita com cheddar cremoso e farofa de bacon.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="abrirModalObs(33, 'Batata Cheddar & Bacon G', 35.9, 'acompanhamentos')">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 🥤 BEBIDAS -->
+            <section id="bebidas" class="category">
+                <div class="category-header">
+                    <h2><i class="fas fa-glass-whiskey"></i> 🥤 Bebidas</h2>
+                </div>
+                <div class="products">
+                    <!-- Refrigerante 350ml -->
+                    <div class="card">
+                        <div class="card-tag-container">
+                            <span class="card-tag drink-tag">Bebida</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Refrigerante 350ml</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 8,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p><strong>Opções:</strong> Coca-Cola, Guaraná, Fanta, Sprite, Pepsi. Coca adicional R$1.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="showDrinkModal('Refrigerante 350ml', 8.9, 1, 34)">Escolher</button>
+                        </div>
+                    </div>
+                    <!-- Refrigerante 600ml -->
+                    <div class="card">
+                        <div class="card-tag-container">
+                            <span class="card-tag drink-tag">Bebida</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Refrigerante 600ml</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 12,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>Opções: Coca, Guaraná, Fanta, Sprite, Pepsi. Coca adicional R$1,50.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="showDrinkModal('Refrigerante 600ml', 12.9, 1.5, 35)">Escolher</button>
+                        </div>
+                    </div>
+                    <!-- Refrigerante 1L -->
+                    <div class="card">
+                        <div class="card-tag-container">
+                            <span class="card-tag drink-tag">Bebida</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Refrigerante 1L</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 16,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>Opções: Coca, Guaraná, Fanta, Sprite, Pepsi. Coca adicional R$2.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="showDrinkModal('Refrigerante 1L', 16.9, 2, 36)">Escolher</button>
+                        </div>
+                    </div>
+                    <!-- Água Mineral 500ml -->
+                    <div class="card">
+                        <div class="card-tag-container">
+                            <span class="card-tag drink-tag">Bebida</span>
+                        </div>
+                        <div class="card-header">
+                            <h3>Água Mineral 500ml</h3>
+                            <div class="card-price-container">
+                                <span class="card-price">R$ 6,90</span>
+                            </div>
+                        </div>
+                        <div class="card-ingredients">
+                            <p>Com ou sem gás.</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="add-to-cart" onclick="showWaterModal('Água Mineral 500ml', 6.9, 37)">Escolher</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Informações de Contato -->
+        <section class="contact-info">
+            <div class="info-content">
+                <div class="info-column">
+                    <h3><i class="fas fa-info-circle"></i> Informações</h3>
+                    <p><i class="fas fa-phone-alt"></i> <strong>Contato:</strong> Exclusivamente via WhatsApp</p>
+                    <p><i class="fas fa-credit-card"></i> <strong>Formas de pagamento:</strong> Débito, Pix e Cartão de crédito</p>
+                    <p><i class="fas fa-clock"></i> <strong>Horário de funcionamento:</strong> Quinta a Domingo, 18:30h às 23:00h</p>
+                </div>
+                
+                <div class="info-column">
+                    <h3><i class="fas fa-shipping-fast"></i> Entrega</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> <strong>Área de entrega:</strong> Salvador e região metropolitana</p>
+                    <p><i class="fas fa-motorcycle"></i> <strong>Tempo médio:</strong> 30-45 minutos</p>
+                </div>
+                
+                <div class="info-column instagram-promo">
+                    <h3><i class="fab fa-instagram"></i> Siga-nos</h3>
+                    <p><strong>@resenhaburgerssa</strong></p>
+                    <p>Veja fotos reais dos nossos clientes e novidades!</p>
+                    <a href="https://instagram.com/resenhaburgerssa" target="_blank" class="instagram-link-small">
+                        <i class="fab fa-instagram"></i> Visitar Instagram
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Copyright -->
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h4>RESENHA<span>BURGER</span></h4>
+                    <p>Hambúrguer 100% soteropolitano 🍔🔥</p>
+                </div>
+                <div class="footer-info">
+                    <p><i class="far fa-copyright"></i> 2024 ResenhaBurger. Todos os direitos reservados.</p>
+                    <p>Salvador - BA</p>
+                </div>
+                <div class="footer-payment">
+                    <p><i class="fas fa-credit-card"></i> Aceitamos:</p>
+                    <div class="payment-icons">
+                        <i class="fab fa-cc-visa" title="Visa"></i>
+                        <i class="fab fa-cc-mastercard" title="Mastercard"></i>
+                        <i class="fab fa-cc-amex" title="American Express"></i>
+                        <i class="fas fa-mobile-alt" title="Pix"></i>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- 🛒 CARRINHO DESLIZANTE -->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-cart"></i> Seu Pedido</h3>
+            <button class="close-cart" onclick="toggleCart()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-body">
+            <div class="cart-empty-state" id="cart-empty-state">
+                <i class="fas fa-shopping-basket"></i>
+                <h4>Carrinho vazio</h4>
+                <button class="btn-continue-shopping" onclick="scrollToSection('mais-pedidos')">Ver Cardápio</button>
+            </div>
+            <ul id="cart-items"></ul>
+
+            <!-- DADOS DO CLIENTE -->
+            <div class="customer-info">
+                <h4><i class="fas fa-user"></i> Dados para entrega</h4>
+                <input type="text" id="clienteNome" placeholder="Nome completo *" class="cart-input">
+                <input type="tel" id="clienteTelefone" placeholder="WhatsApp *" class="cart-input" onblur="buscarPontosCliente()">
+                <input type="text" id="clienteEndereco" placeholder="Endereço completo *" class="cart-input">
+                <input type="text" id="clienteReferencia" placeholder="Ponto de referência" class="cart-input">
+                <textarea id="observacoes" placeholder="Observações gerais" class="cart-input" rows="2"></textarea>
+            </div>
+
+            <!-- SISTEMA DE PONTOS -->
+            <div class="points-system" id="points-system" style="display: none;">
+                <div class="points-info">
+                    <i class="fas fa-star"></i> Seus pontos: <strong id="cliente-pontos">0</strong>
+                </div>
+                <div class="points-discount" id="points-discount-container" style="display: none;">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="usarPontosCheckbox" onchange="aplicarDescontoPontos()">
+                        <span>Usar 150 pontos para R$10 de desconto</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- RESUMO -->
+            <div class="cart-summary">
+                <div class="summary-row"><span>Subtotal:</span><span id="subtotal">R$ 0,00</span></div>
+                <div class="summary-row"><span>Desconto Pontos:</span><span id="points-discount">R$ 0,00</span></div>
+                <div class="summary-row total"><span>Total:</span><span id="total">R$ 0,00</span></div>
+            </div>
+
+            <!-- UPSELL -->
+            <div class="cart-upsell" id="cart-upsell" style="display: none;">
+                <h4><i class="fas fa-bolt"></i> Adicionar mais?</h4>
+                <div id="upsell-suggestions"></div>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <button class="btn-checkout" id="checkout-btn" onclick="checkoutWhatsApp()" disabled>
+                <i class="fab fa-whatsapp"></i> Finalizar no WhatsApp
+            </button>
+            <div class="cart-footer-actions">
+                <button class="btn-clear" onclick="limparCarrinho()"><i class="fas fa-trash-alt"></i> Limpar carrinho</button>
+                <button class="btn-continue" onclick="toggleCart()"><i class="fas fa-utensils"></i> Continuar comprando</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botão flutuante do carrinho -->
+    <button id="cart-toggle" class="cart-toggle" onclick="toggleCart()">
+        <i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span>
+    </button>
+
+    <!-- Modal de observações -->
+    <div id="obs-modal" class="modal">
+        <div class="modal-content">
+            <h3><i class="fas fa-pencil-alt"></i> Observações para este item</h3>
+            <textarea id="obs-text" placeholder="Ex: sem cebola, ponto da carne, etc." rows="4"></textarea>
+            <div class="modal-actions">
+                <button class="btn-confirm" onclick="adicionarAoCarrinhoComObs()">Confirmar</button>
+                <button class="btn-cancel" onclick="fecharObsModal()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para seleção de bebidas -->
+    <div id="drink-modal" class="modal">
+        <div class="modal-content">
+            <h3>Escolha sua bebida</h3>
+            <p id="drink-modal-title"></p>
+            <div id="drink-options" class="drink-options"></div>
+            <button class="btn-cancel" onclick="closeDrinkModal()">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- Modal para seleção de água -->
+    <div id="water-modal" class="modal">
+        <div class="modal-content">
+            <h3>Escolha sua água</h3>
+            <p id="water-modal-title"></p>
+            <div id="water-options" class="drink-options"></div>
+            <button class="btn-cancel" onclick="closeWaterModal()">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- Modal de Upsell -->
+    <div id="upsell-modal" class="modal upsell-modal-fixed">
+        <div class="modal-content">
+            <h3><i class="fas fa-bolt"></i> Quer adicionar mais?</h3>
+            <p id="upsell-message"></p>
+            <div id="upsell-options"></div>
+            <button class="btn-cancel" onclick="closeUpsellModal()">Não, obrigado</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
